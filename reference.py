@@ -355,3 +355,57 @@ def update_connected_airports_map(selected_airport, start_date, end_date, flight
 
 if __name__ == "__main__":
     app.run_server(debug=True)
+
+
+
+from keplergl import KeplerGl
+
+# # BETTER
+
+# def load_and_preprocess_data():
+#     main_df = pd.read_csv('flights.csv', low_memory=False)
+#     airport_df = pd.read_csv("airports.csv")
+#     airline_df = pd.read_csv("airlines.csv").iloc[:, :2].rename(columns={
+#         'IATA_CODE': 'AIRLINE_CODE', 
+#         'AIRLINE': 'AIRLINE_NAME'
+#     })
+
+
+#     # Step 1: Merging airport information
+#     # For origin airport
+#     main_df = main_df.merge(airport_df, left_on='ORIGIN_AIRPORT', right_on='IATA_CODE', how='left')
+#     main_df = main_df.rename(columns={
+#         'AIRPORT': 'origin_AIRPORT',
+#         'CITY': 'origin_CITY',
+#         'STATE': 'origin_STATE',
+#         'LATITUDE': 'origin_LATITUDE',
+#         'LONGITUDE': 'origin_LONGITUDE'
+#     })
+
+#     # For destination airport
+#     main_df = main_df.merge(airport_df, left_on='DESTINATION_AIRPORT', right_on='IATA_CODE', how='left', suffixes=('', '_dest'))
+#     main_df = main_df.rename(columns={
+#         'AIRPORT': 'dest_AIRPORT',
+#         'CITY': 'dest_CITY',
+#         'STATE': 'dest_STATE',
+#         'LATITUDE': 'dest_LATITUDE',
+#         'LONGITUDE': 'dest_LONGITUDE'
+#     })
+
+#     # Remove duplicate columns
+#     main_df = main_df.drop(['IATA_CODE', 'IATA_CODE_dest', 'COUNTRY', 'COUNTRY_dest'], axis=1)
+
+#     # Step 2: Merging airline information
+#     main_df = main_df.merge(airline_df, left_on='AIRLINE', right_on='AIRLINE_CODE', how='left')
+#     main_df = main_df.rename(columns={'AIRLINE_NAME': 'AIRLINE_NAME'})
+
+#     # Remove duplicate column
+#     main_df = main_df.drop('AIRLINE_CODE', axis=1)
+
+#     main_df.fillna({ 'dest_LATITUDE': 0.0}, inplace=True)
+#     main_df.fillna(0, inplace=True)
+#     main_df = main_df[main_df['dest_LATITUDE'] != 0.0]
+
+#     return main_df, airport_df, airline_df
+
+
